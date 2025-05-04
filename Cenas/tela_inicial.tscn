@@ -1,0 +1,125 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcb2t0xjbfiqa"]
+
+[ext_resource type="Texture2D" uid="uid://d03obdjmu05l5" path="res://Assets/Captura de tela 2025-04-23 010727.png" id="1_j18tp"]
+[ext_resource type="Script" path="res://Scripts/tela_inicial.gd" id="1_jjoac"]
+[ext_resource type="Texture2D" uid="uid://cvbrueknfhp0s" path="res://Assets/Logo.png" id="2_8sp84"]
+[ext_resource type="AudioStream" uid="uid://cbaaq8n1fdg3l" path="res://Assets/Sound/515615__mrthenoronha__8-bit-game-theme.wav" id="4_8q56u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4ce3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hoqgk"]
+
+[sub_resource type="Animation" id="Animation_0lvqp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fttaf"]
+resource_name = "TelaInicial"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.988235)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8hhc"]
+_data = {
+"RESET": SubResource("Animation_0lvqp"),
+"TelaInicial": SubResource("Animation_fttaf")
+}
+
+[node name="TelaInicial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 20.0
+offset_right = 44.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jjoac")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.537255)
+layout_mode = 2
+offset_left = -41.0
+offset_top = -17.0
+offset_right = 1106.0
+offset_bottom = 624.0
+texture = ExtResource("1_j18tp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -21.0
+offset_right = -41.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("2_8sp84")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_i4ce3")
+
+[node name="Start" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_hoqgk")
+
+[node name="QuitGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "QuitGame
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i8hhc")
+}
+autoplay = "TelaInicial"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8q56u")
+volume_db = -17.165
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
