@@ -1,0 +1,14 @@
+AnimatedSprite2D
+Node2D
+Node
+AudioStreamPlayer
+AnimationPlayer
+Label
+HBoxContainer
+MarginContainer
+TextureRect
+VBoxContainer
+Timer
+ColorRect
+HSeparator
+Button
